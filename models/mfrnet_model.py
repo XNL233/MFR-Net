@@ -10,7 +10,7 @@ from util import contextual as cl  # contextual loss
 def mul_mask(image, mask):
     return (image + 1) * mask - 1
 
-# MFRNet
+# MFR-Net
 class MFRNetModel(BaseModel):
     @staticmethod
     def modify_commandline_options(parser, is_train=True):
@@ -124,7 +124,6 @@ class MFRNetModel(BaseModel):
             self.fake_SBH = mul_mask(self.fake_SBH, self.S_mask)
 
             self.fake_TF = self.netG(self.real_TA6, encode_only=True)  # [batch_size, 512, 4, 4]
-
         else:
             self.fake_TB, _ = self.netG(self.real_TA6, encode_only=False)  # G(TA)
             self.fake_TB = mul_mask(self.fake_TB, self.T_mask)
