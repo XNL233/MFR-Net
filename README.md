@@ -65,7 +65,7 @@ In another terminal, run the following command to start training:
 
 ```bash
 python train.py --dataroot ./images/train --name MFRNet --model mfrnet --netG ufpro --input_nc 6 --direction AtoB 
---dataset_mode cataract_guide_padding --norm instance --batch_size 8 --n_epochs 80 --n_epochs_decay 20 --lr 0.0002 --verbose --use_HFC_OT_loss
+--dataset_mode cataract_guide_padding --norm instance --batch_size 8 --gpu_ids 0 --n_epochs 80 --n_epochs_decay 20 --lr 0.0002 --verbose --use_HFC_OT_loss
 ```
 
 ### 4. Test
