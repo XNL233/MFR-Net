@@ -1,16 +1,13 @@
 import torch
 import torch.nn as nn
 import functools
-import torch.nn.functional as F
 from torch.nn import init
 from torch.optim import lr_scheduler
-# from .guided_filter_pytorch.guided_filter import FastGuidedFilter
 
 
 class Identity(nn.Module):
     def forward(self, x):
         return x
-
 
 def get_norm_layer(norm_type='instance'):
     """Return a normalization layer
@@ -179,6 +176,7 @@ def define_D(input_nc, ndf, netD, n_layers_D=3, norm='batch', init_type='normal'
     # the domain discriminator of MFR-Net
     elif netD == 'style':
         net = StyleDiscriminator(input_nc)
+
     else:
         raise NotImplementedError('Discriminator model name [%s] is not recognized' % netD)
     return init_net(net, init_type, init_gain, gpu_ids)
@@ -189,7 +187,6 @@ class GANLoss(nn.Module):
     The GANLoss class abstracts away the need to create the target label tensor
     that has the same size as the input.
     """
-
     def __init__(self, gan_mode, target_real_label=1.0, target_fake_label=0.0):
         """ Initialize the GANLoss class.
 
@@ -479,7 +476,6 @@ class FCDiscriminator(nn.Module):
         return self.net(x)
 
 
-# ***********************************************************************************
 # domain discriminator with FSEM
 class StyleDiscriminator(nn.Module):
     def __init__(self, input_nc):
@@ -531,6 +527,5 @@ class FSEM(nn.Module):
         enhanced_features = style_features * attention_weights  # [B, 2*C, 1, 1]
 
         return enhanced_features
-# ***********************************************************************************
 
 
